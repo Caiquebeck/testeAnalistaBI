@@ -1,9 +1,8 @@
 let
-    Fonte = Web.BrowserContents("https://www.preparaenem.com/geografia/estados-brasileiros.htm"),
-    #"Tabela extraída de HTML" = Html.Table(Fonte, {{"Column1", "DIV.table-responsive:nth-child(7) > TABLE.Table > * > TR > :nth-child(1)"}, {"Column2", "DIV.table-responsive:nth-child(7) > TABLE.Table > * > TR > :nth-child(2)"}, {"Column3", "DIV.table-responsive:nth-child(7) > TABLE.Table > * > TR > :nth-child(3)"}, {"Column4", "DIV.table-responsive:nth-child(7) > TABLE.Table > * > TR > :nth-child(4)"}}, [RowSelector="DIV.table-responsive:nth-child(7) > TABLE.Table > * > TR"]),
-    #"Tipo Alterado" = Table.TransformColumnTypes(#"Tabela extraída de HTML",{{"Column1", type text}, {"Column2", type text}, {"Column3", type text}, {"Column4", type text}}),
-    #"Outras Colunas Removidas" = Table.SelectColumns(#"Tipo Alterado",{"Column1", "Column2"}),
-    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(#"Outras Colunas Removidas", [PromoteAllScalars=true]),
+    Fonte = Web.BrowserContents("https://mundoeducacao.uol.com.br/geografia/estados-brasil.htm"),
+    #"Tabela extraída de HTML" = Html.Table(Fonte, {{"Column1", "DIV.table-responsive:nth-child(6) > TABLE > * > TR > :nth-child(1)"}, {"Column2", "DIV.table-responsive:nth-child(6) > TABLE > * > TR > :nth-child(2)"}}, [RowSelector="DIV.table-responsive:nth-child(6) > TABLE > * > TR"]),
+    #"Tipo Alterado" = Table.TransformColumnTypes(#"Tabela extraída de HTML",{{"Column1", type text}, {"Column2", type text}}),
+    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(#"Tipo Alterado", [PromoteAllScalars=true]),
     #"Tipo Alterado1" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"Estado", type text}, {"Sigla", type text}}),
     #"Valor Substituído" = Table.ReplaceValue(#"Tipo Alterado1","á","a",Replacer.ReplaceText,{"Estado"}),
     #"Valor Substituído1" = Table.ReplaceValue(#"Valor Substituído","ã","a",Replacer.ReplaceText,{"Estado"}),
