@@ -1,0 +1,10 @@
+let
+    Fonte = Csv.Document(Web.Contents("https://raw.githubusercontent.com/TesteBINeoway/testeAnalistaBI/main/an_bi_senior/spreadsheets/cotacoes_bolsa.csv"),[Delimiter=";", Columns=30, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true]),
+    #"Colunas Removidas" = Table.RemoveColumns(#"Cabeçalhos Promovidos",{"id", "tp_reg", "nm_empresa_rdz", "prazot", "moeda_ref", "in_opc", "dt_vnct_opc", "ft_cotacao", "vl_exec_moeda_corrente", "cd_isin", "created_at", "updated_at", "__index_level_0__", "vl_exec_opc", "cd_acao_rdz"}),
+    #"Linhas Filtradas1" = Table.SelectRows(#"Colunas Removidas", each ([cd_bdi] = "02")),
+    #"Tipo Alterado com Localidade" = Table.TransformColumnTypes(#"Linhas Filtradas1", {{"vl_abertura", type number}, {"vl_maximo", type number}, {"vl_minimo", type number}, {"vl_medio", type number}, {"vl_fechamento", type number}, {"vl_mlh_oft_compra", type number}, {"vl_mlh_oft_venda", type number}, {"vl_ttl_neg", type number}, {"qt_tit_neg", type number}, {"vl_volume", type number}}, "en-US"),
+    #"Tipo Alterado" = Table.TransformColumnTypes(#"Tipo Alterado com Localidade",{{"dt_pregao", type date}, {"cd_bdi", Int64.Type}, {"cd_acao", type text}, {"tp_merc", Int64.Type}, {"vl_abertura", type number}, {"vl_maximo", type number}, {"vl_minimo", type number}, {"vl_medio", type number}, {"vl_fechamento", type number}, {"vl_mlh_oft_compra", type number}, {"vl_mlh_oft_venda", type number}, {"vl_ttl_neg", Int64.Type}, {"qt_tit_neg", Int64.Type}, {"vl_volume", Int64.Type}}),
+    #"Linhas Filtradas" = Table.SelectRows(#"Tipo Alterado", each [dt_pregao] >= #date(2022, 1, 1))
+in
+    #"Linhas Filtradas"

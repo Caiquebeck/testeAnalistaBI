@@ -1,0 +1,5 @@
+let
+    Fonte = Csv.Document(Web.Contents("https://raw.githubusercontent.com/TesteBINeoway/testeAnalistaBI/main/an_bi_senior/spreadsheets/cotacoes_bolsa.csv"),[Delimiter=";", Columns=30, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true])
+in
+    #"Cabeçalhos Promovidos"

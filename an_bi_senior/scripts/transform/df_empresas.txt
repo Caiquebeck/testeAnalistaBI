@@ -1,0 +1,15 @@
+let
+    Fonte = Csv.Document(Web.Contents("https://raw.githubusercontent.com/TesteBINeoway/testeAnalistaBI/main/an_bi_senior/spreadsheets/df_empresas.csv"),[Delimiter=";", Columns=13, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true]),
+    #"Colunas Removidas" = Table.RemoveColumns(#"Cabeçalhos Promovidos",{"matriz.empresaMatriz", "cd_cnae_principal"}),
+    #"Tipo Alterado" = Table.TransformColumnTypes(#"Colunas Removidas",{{"cnpj", Int64.Type}, {"dt_abertura", type date}, {"de_cnae_principal", type text}, {"de_ramo_atividade", type text}, {"de_setor", type text}, {"endereco_cep", Int64.Type}, {"endereco_municipio", type text}, {"endereco_uf", type text}, {"endereco_regiao", type text}, {"endereco_mesorregiao", type text}, {"situacao_cadastral", type text}}),
+    #"Consultas Mescladas" = Table.NestedJoin(#"Tipo Alterado", {"cnpj"}, empresas_nivel_atividade, {"cnpj"}, "empresas_nivel_atividade", JoinKind.LeftOuter),
+    #"empresas_nivel_atividade Expandido" = Table.ExpandTableColumn(#"Consultas Mescladas", "empresas_nivel_atividade", {"nivel_atividade"}, {"nivel_atividade"}),
+    #"Consultas Mescladas1" = Table.NestedJoin(#"empresas_nivel_atividade Expandido", {"cnpj"}, empresas_porte, {"cnpj"}, "empresas_porte", JoinKind.LeftOuter),
+    #"empresas_porte Expandido" = Table.ExpandTableColumn(#"Consultas Mescladas1", "empresas_porte", {"empresa_porte"}, {"empresa_porte"}),
+    #"Consultas Mescladas2" = Table.NestedJoin(#"empresas_porte Expandido", {"cnpj"}, empresas_saude_tributaria, {"cnpj"}, "empresas_saude_tributaria", JoinKind.LeftOuter),
+    #"empresas_saude_tributaria Expandido" = Table.ExpandTableColumn(#"Consultas Mescladas2", "empresas_saude_tributaria", {"saude_tributaria"}, {"saude_tributaria"}),
+    #"Consultas Mescladas3" = Table.NestedJoin(#"empresas_saude_tributaria Expandido", {"cnpj"}, empresas_simples, {"cnpj"}, "empresas_simples", JoinKind.LeftOuter),
+    #"empresas_simples Expandido" = Table.ExpandTableColumn(#"Consultas Mescladas3", "empresas_simples", {"optante_simples", "optante_simei"}, {"optante_simples", "optante_simei"})
+in
+    #"empresas_simples Expandido"

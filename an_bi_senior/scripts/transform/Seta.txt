@@ -1,0 +1,5 @@
+let
+    Fonte = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("jc/RCoIwGIbhW4kdO5ehZN1AIAZFEJR4MOeskf5bvxtJV58dGFQSHb18Jw98WUacIR45W2vaJWPKV0XhC80uU7xjkjIlNLQx5UI1nJYKpbJ9JVjUfahrqKAoXK3pLPQNnEjuZaTUNxhDD2IbL6LjCy246vTfKkhnkddj8DUJRBV3A/yv6MzEouL9GjGrIJqvN6vB1FjKhvJWSHiy8vPvDwnSPSTh7l0q5TeVPwA=", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [seta = _t, link = _t]),
+    #"Tipo Alterado" = Table.TransformColumnTypes(Fonte,{{"seta", type text}, {"link", type text}})
+in
+    #"Tipo Alterado"

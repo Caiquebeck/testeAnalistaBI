@@ -1,0 +1,6 @@
+let
+    Fonte = Csv.Document(Web.Contents("https://raw.githubusercontent.com/TesteBINeoway/testeAnalistaBI/main/an_bi_senior/spreadsheets/empresas_saude_tributaria.csv"),[Delimiter=";", Columns=2, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true]),
+    #"Tipo Alterado" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"cnpj", Int64.Type}, {"saude_tributaria", type text}})
+in
+    #"Tipo Alterado"
