@@ -1,0 +1,20 @@
+Extract
+Conexões via Web
+
+https://raw.githubusercontent.com/TesteBINeoway/testeAnalistaBI/main/an_bi_senior/spreadsheets/cotacoes_bolsa.cs
+
+https://raw.githubusercontent.com/TesteBINeoway/testeAnalistaBI/main/an_bi_senior/spreadsheets/df_empresas.csv
+
+https://raw.githubusercontent.com/TesteBINeoway/testeAnalistaBI/main/an_bi_senior/spreadsheets/empresas_bolsa.csv
+
+https://raw.githubusercontent.com/TesteBINeoway/testeAnalistaBI/main/an_bi_senior/spreadsheets/empresas_nivel_atividade.csv
+
+https://raw.githubusercontent.com/TesteBINeoway/testeAnalistaBI/main/an_bi_senior/spreadsheets/empresas_porte.csv
+
+https://raw.githubusercontent.com/TesteBINeoway/testeAnalistaBI/main/an_bi_senior/spreadsheets/empresas_saude_tributaria.csv
+
+https://raw.githubusercontent.com/TesteBINeoway/testeAnalistaBI/main/an_bi_senior/spreadsheets/empresas_simples.csv
+
+https://mundoeducacao.uol.com.br/geografia/estados-brasil.htm
+
+https://www.preparaenem.com/geografia/estados-brasileiros.htm
