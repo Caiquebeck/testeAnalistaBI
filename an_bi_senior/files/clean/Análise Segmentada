@@ -1,0 +1,10 @@
+Análise Segmentada	Análise Segmentada Campos	Análise Segmentada Pedido
+Segmento B3	'dEmpresas'[Segmento B3]	0
+Setor	'dEmpresas'[Setor]	1
+Setor Econômico	'dEmpresas'[Setor Econômico]	2
+Subsetor	'dEmpresas'[Subsetor]	3
+Ramo de Atividade	'dEmpresas'[Ramo de Atividade]	4
+Segmento	'dEmpresas'[Segmento]	5
+Porte	'dEmpresas'[Porte]	6
+Nível de Atividade	'dEmpresas'[Nível de Atividade]	7
+Saúde Tributária	'dEmpresas'[Saúde Tributária]	8
